@@ -8,9 +8,10 @@ buildscript {
 }
 
 plugins {
-    id 'java'
     id 'com.silverhetch.thea' version '1.2.1'
 }
+
+apply plugin: 'java-library'
 
 def libVersion = thea.version.versionByFlavor("").versionName()
 group 'com.silverhetch'
@@ -51,6 +52,10 @@ bintray {
             }
         }
     }
+}
+
+jar {
+    from sourceSets.main.allSource
 }
 
 task sourcesJar(type: Jar) {
