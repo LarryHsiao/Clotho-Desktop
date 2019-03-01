@@ -52,3 +52,27 @@ bintray {
         }
     }
 }
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar) {
+    from javadoc
+    classifier = 'javadoc'
+}
+
+apply plugin: 'maven-publish'
+publishing {
+    publications {
+        release(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            groupId 'com.silverhetch'
+            artifactId 'clotho-desktop'
+            version libVersion
+        }
+    }
+}
