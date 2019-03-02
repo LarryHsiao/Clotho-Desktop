@@ -1,9 +1,11 @@
 buildscript {
+    ext.kotlin_version = '1.3.21'
     repositories {
         maven { url = 'http://172.104.79.181:81/repository/Elizabeth/' }
     }
     dependencies{
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -11,6 +13,7 @@ plugins {
     id 'com.silverhetch.thea' version '1.2.1'
 }
 
+apply plugin: 'kotlin'
 apply plugin: 'java-library'
 
 def libVersion = thea.version.versionByFlavor("").versionName()
