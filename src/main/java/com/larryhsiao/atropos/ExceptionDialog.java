@@ -1,7 +1,6 @@
-package com.larryhsiao.clotho.desktop;
+package com.larryhsiao.atropos;
 
 import com.silverhetch.clotho.Action;
-import com.silverhetch.clotho.Source;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;

@@ -1,4 +1,4 @@
-package com.larryhsiao.clotho.desktop.exectable
+package com.larryhsiao.atropos.exectable
 
 import java.awt.Desktop
 import java.io.File
