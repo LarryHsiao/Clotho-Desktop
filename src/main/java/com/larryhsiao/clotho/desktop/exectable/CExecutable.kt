@@ -1,4 +1,4 @@
-package com.silverhetch.clotho.desktop.exectable
+package com.larryhsiao.clotho.desktop.exectable
 
 /**
  * Represents resources can be 'Launch'.

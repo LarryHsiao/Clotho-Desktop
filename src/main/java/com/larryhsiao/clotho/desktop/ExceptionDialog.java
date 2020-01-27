@@ -1,5 +1,6 @@
-package com.silverhetch.clotho.desktop;
+package com.larryhsiao.clotho.desktop;
 
+import com.silverhetch.clotho.Action;
 import com.silverhetch.clotho.Source;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -13,7 +14,7 @@ import java.io.StringWriter;
 /**
  * Exception dialog implemented with JavaFx.
  */
-public class ExceptionDialog implements Source<Void> {
+public class ExceptionDialog implements Action {
     private final Exception ex;
 
     public ExceptionDialog(Exception ex) {
@@ -21,7 +22,7 @@ public class ExceptionDialog implements Source<Void> {
     }
 
     @Override
-    public Void fetch() {
+    public void fire() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Exception Dialog");
         alert.setHeaderText("Exception");
@@ -50,6 +51,5 @@ public class ExceptionDialog implements Source<Void> {
 
         alert.getDialogPane().setExpandableContent(expContent);
         alert.showAndWait();
-        return null;
     }
 }

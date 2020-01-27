@@ -1,7 +1,8 @@
 buildscript {
-    ext.kotlin_version = '1.3.21'
-    repositories {
-        maven { url = 'http://172.104.79.181:81/repository/Elizabeth/' }
+    ext.kotlin_version = '1.3.61'
+    repositories{
+        mavenCentral()
+        jcenter()
     }
     dependencies{
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
@@ -9,20 +10,18 @@ buildscript {
     }
 }
 
-plugins {
-    id 'com.silverhetch.thea' version '1.2.1'
+plugins{
+    id 'org.openjfx.javafxplugin' version '0.0.8'
 }
 
 apply plugin: 'kotlin'
 apply plugin: 'java-library'
 
-def libVersion = thea.version.versionByFlavor("").versionName()
-group 'com.silverhetch'
+def libVersion = "1.3.1"
+group 'com.larryhsiao'
 version libVersion
 
-println(thea.versionIndicator.apply(""))
-
-sourceCompatibility = 1.8
+sourceCompatibility = 1.11
 
 repositories {
     mavenCentral()
@@ -30,8 +29,10 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile "com.silverhetch:clotho:1.1.0"
+    api "com.silverhetch:clotho:1.15.0"
+    testImplementation "org.testfx:testfx-junit5:4.0.16-alpha"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
 }
 
 apply plugin: 'com.jfrog.bintray'
@@ -43,10 +44,10 @@ bintray {
     override = true
     pkg {
         repo = 'Elizabeth'
-        name = 'Clotho-Desktop'
+        name = 'Atropos'
         userOrg = 'larryhsiao'
         licenses = ['MIT']
-        vcsUrl = 'https://github.com/LarryHsiao/Clotho-Desktop.git'
+        vcsUrl = 'https://github.com/LarryHsiao/Atropos.git'
         version {
             name = libVersion
             gpg {
@@ -57,8 +58,23 @@ bintray {
     }
 }
 
+javafx {
+    version = "11"
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.base', 'javafx.swing', 'javafx.media']
+}
+
 jar {
     from sourceSets.main.allSource
+}
+
+test {
+    useJUnitPlatform {
+    }
+    doFirst {
+        jvmArgs += [
+                '--add-exports', "javafx.graphics/com.sun.javafx.application=org.testfx",
+        ]
+    }
 }
 
 task sourcesJar(type: Jar) {
@@ -78,8 +94,8 @@ publishing {
             from components.java
             artifact sourcesJar
             artifact javadocJar
-            groupId 'com.silverhetch'
-            artifactId 'clotho-desktop'
+            groupId 'com.larryhsiao'
+            artifactId 'atropos'
             version libVersion
         }
     }

@@ -1,4 +1,4 @@
-package com.silverhetch.clotho.desktop.exectable
+package com.larryhsiao.clotho.desktop.exectable
 
 import java.awt.Desktop
 import java.io.File
