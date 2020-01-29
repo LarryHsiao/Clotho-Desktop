@@ -1,4 +1,5 @@
 module atropos {
+    requires javafx.web;
     requires javafx.controls;
     requires java.desktop;
     requires kotlin.stdlib;
